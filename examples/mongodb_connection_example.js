@@ -1,11 +1,15 @@
 // Basic MongoDB Connection Example
-const { MongoClient } = require('mongodb');
+const  MongoClient  = require('mongoose');
 
 // Connection URI - replace with your MongoDB connection string if using Atlas
-const uri = 'mongodb://localhost:27017';
+async function connectDB(){
+    await mongoose.connect(process.env.MONGODB_URI),
+    console.log("Connected to MongoDB");
+}
+module.exports = {connectDB, MongoClient };
 
 // Database Name
-const dbName = 'bookstore';
+const dbName = 'plp_bookstore';
 
 // Create a new MongoClient
 const client = new MongoClient(uri);
@@ -13,7 +17,7 @@ const client = new MongoClient(uri);
 async function main() {
   try {
     // Connect to the MongoDB server
-    await client.connect();
+    await client.connectDB();
     console.log('Connected successfully to MongoDB server');
     
     // Get reference to the database
